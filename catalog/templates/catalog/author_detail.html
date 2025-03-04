@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{ author.first_name }} {{ author.last_name }}</h1>
+
+  <p><strong>Date of birth:</strong> {{ author.date_of_birth }}</p>
+  <p><strong>Date of death:</strong> {{ author.date_of_death|default:"N/A" }}</p>
+
+  <h2>Books by {{ author.first_name }} {{ author.last_name }}:</h2>
+  <ul>
+    {% for book in author.book_set.all %}
+      <li><a href="{% url 'book-detail' book.pk %}">{{ book.title }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'author-list' %}">Back to All Authors</a>
+{% endblock %}
+
